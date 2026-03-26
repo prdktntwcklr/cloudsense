@@ -41,10 +41,12 @@ jobs:
         if: steps.cache-zephyr.outputs.cache-hit != 'true'
         run: |
           west init -l my-project/firmware
+          cd my-project
           west update
 
       - name: Build Firmware
         run: |
+          cd my-project
           west build -b native_sim my-project/firmware
 
       - name: Run Simulation Test

@@ -1,0 +1,11 @@
+# West internal state
+.west/
+
+# Zephyr build artifacts
+build/
+
+# Downloaded Zephyr modules
+bootloader/
+modules/
+tools/
+zephyr/

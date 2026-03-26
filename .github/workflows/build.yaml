@@ -1,0 +1,48 @@
+name: Zephyr Build
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container:
+      image: zephyrprojectrtos/zephyr-build:latest
+      options: --user root
+
+    env:  
+      ZEPHYR_SDK_INSTALL_DIR: /opt/toolchains/zephyr-sdk-1.0.0
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          path: cloudsense
+
+      - name: Initialize West
+        run: |
+          cd cloudsense
+          west init -l firmware
+          west update
+
+      - name: Build Firmware (Native Sim)
+        run: |
+          cd cloudsense
+          west build -b native_sim firmware
+
+      - name: Archive artifacts
+        uses: actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f # v7.0.0
+        with:
+          name: zephyr-executable
+          if-no-files-found: error
+          path: cloudsense/build/zephyr/zephyr.exe
+          retention-days: 1
+
+      - name: Run Simulation Test
+        run: |
+          timeout 5s ./cloudsense/build/zephyr/zephyr.exe > output.log || true
+          cat output.log
+          grep "Hello from CloudSense" output.log

@@ -1,0 +1,11 @@
+{
+    "name": "Zephyr Development",
+    "image": "zephyrprojectrtos/zephyr-build:latest",
+    "customizations": {
+        "vscode": {
+            "settings": {
+                "terminal.integrated.defaultProfile.linux": "bash"
+            }
+        }
+    }
+}

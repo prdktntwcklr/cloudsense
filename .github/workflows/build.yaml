@@ -10,39 +10,46 @@ jobs:
   build:
     runs-on: ubuntu-latest
     container:
-      image: zephyrprojectrtos/zephyr-build:latest
+      image: zephyrprojectrtos/zephyr-build:v0.29.0
       options: --user root
 
-    env:  
+    env:
       ZEPHYR_SDK_INSTALL_DIR: /opt/toolchains/zephyr-sdk-1.0.0
 
     steps:
       - name: Checkout
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
         with:
-          path: cloudsense
+          path: my-project 
+
+      - name: Cache Zephyr Workspace
+        id: cache-zephyr
+        uses: actions/cache@668228422ae6a00e4ad889ee87cd7109ec5666a7 # v5.0.4
+        with:
+          path: |
+            my-project/.west
+            my-project/bootloader
+            my-project/modules
+            my-project/tools
+            my-project/zephyr
+          key: ${{ runner.os }}-zephyr-${{ hashFiles('my-project/firmware/west.yml') }}
+          restore-keys: |
+            ${{ runner.os }}-zephyr-
 
       - name: Initialize West
+        # Only run if cache missed
+        if: steps.cache-zephyr.outputs.cache-hit != 'true'
         run: |
-          cd cloudsense
-          west init -l firmware
+          west init -l my-project/firmware
+          cd my-project
           west update
 
-      - name: Build Firmware (Native Sim)
+      - name: Build Firmware
         run: |
-          cd cloudsense
+          cd my-project
           west build -b native_sim firmware
-
-      - name: Archive artifacts
-        uses: actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f # v7.0.0
-        with:
-          name: zephyr-executable
-          if-no-files-found: error
-          path: cloudsense/build/zephyr/zephyr.exe
-          retention-days: 1
 
       - name: Run Simulation Test
         run: |
-          timeout 5s ./cloudsense/build/zephyr/zephyr.exe > output.log || true
-          cat output.log
+          timeout 5s ./my-project/build/zephyr/zephyr.exe > output.log || true
           grep "Hello from CloudSense" output.log

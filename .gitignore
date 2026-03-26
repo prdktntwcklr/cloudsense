@@ -11,4 +11,5 @@ tools/
 zephyr/
 
 # Twister
-twister-out/
+twister-out*/
+test-results*/

@@ -55,7 +55,7 @@ jobs:
           cd my-project
           west build -b native_sim firmware
 
-      - name: Run Simulation Test
+      - name: Run Tests
         run: |
-          timeout 5s ./my-project/build/zephyr/zephyr.exe > output.log || true
-          grep "Hello from CloudSense" output.log
+          cd my-project
+          west twister -p native_sim -T firmware --outdir test-results -v

@@ -1,6 +1,6 @@
 {
     "name": "Zephyr Development",
-    "image": "zephyrprojectrtos/zephyr-build:latest",
+    "image": "zephyrprojectrtos/zephyr-build:v0.29.0",
     "customizations": {
         "vscode": {
             "settings": {

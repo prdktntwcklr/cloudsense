@@ -10,7 +10,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     container:
-      image: zephyrprojectrtos/zephyr-build:latest
+      image: zephyrprojectrtos/zephyr-build:v0.29.0
       options: --user root
 
     env:  
@@ -22,7 +22,24 @@ jobs:
         with:
           path: cloudsense
 
+      - name: Cache Zephyr Workspace
+        id: cache-zephyr
+        uses: actions/cache@668228422ae6a00e4ad889ee87cd7109ec5666a7 # v5.0.4
+        with:
+          # Cache everything west manages EXCEPT our own code
+          path: |
+            .west
+            bootloader
+            modules
+            tools
+            zephyr
+          # The cache key is based on the hash of west.yml
+          key: ${{ runner.os }}-zephyr-${{ hashFiles('cloudsense/firmware/west.yml') }}
+          restore-keys: |
+            ${{ runner.os }}-zephyr-
+
       - name: Initialize West
+        if: steps.cache-zephyr.outputs.cache-hit != 'true'
         run: |
           cd cloudsense
           west init -l firmware

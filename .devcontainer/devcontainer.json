@@ -7,5 +7,6 @@
                 "terminal.integrated.defaultProfile.linux": "bash"
             }
         }
-    }
+    },
+    "postStartCommand": "if [ ! -d '.west' ]; then west init -l firmware; fi && west update"
 }

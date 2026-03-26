@@ -47,9 +47,9 @@ jobs:
       - name: Build Firmware
         run: |
           cd my-project
-          west build -b native_sim my-project/firmware
+          west build -b native_sim firmware
 
       - name: Run Simulation Test
         run: |
-          timeout 5s ./build/zephyr/zephyr.exe > output.log || true
+          timeout 5s ./my-project/build/zephyr/zephyr.exe > output.log || true
           grep "Hello from CloudSense" output.log

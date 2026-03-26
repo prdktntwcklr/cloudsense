@@ -9,3 +9,6 @@ bootloader/
 modules/
 tools/
 zephyr/
+
+# Twister
+twister-out/

@@ -3,8 +3,14 @@ name: Zephyr Build
 on:
   push:
     branches: [ main ]
+    paths:
+      - 'firmware/**'
+      - '.github/workflows/build.yaml'
   pull_request:
     branches: [ main ]
+    paths:
+      - 'firmware/**'
+      - '.github/workflows/build.yaml'
 
 jobs:
   build:

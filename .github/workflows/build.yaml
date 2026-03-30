@@ -28,10 +28,28 @@ jobs:
         with:
           path: my-project
 
+      - name: Cache Zephyr Workspace
+        id: cache-zephyr
+        uses: actions/cache@668228422ae6a00e4ad889ee87cd7109ec5666a7 # v5.0.4
+        with:
+          path: |
+            my-project/.west
+            my-project/bootloader
+            my-project/modules
+            my-project/tools
+            my-project/zephyr
+          key: ${{ runner.os }}-zephyr-${{ hashFiles('my-project/firmware/west.yml') }}
+          restore-keys: |
+            ${{ runner.os }}-zephyr-
+
       - name: Initialize West
         run: |
           cd my-project
-          west init -l firmware
+
+          if [ ! -d ".west" ]; then
+            west init -l firmware
+          fi
+          
           west update
 
       - name: Build Application

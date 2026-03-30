@@ -1,7 +1,7 @@
-menu "Zephyr Kernel"
-    source "Kconfig.zephyr"
-endmenu
+# menu "Zephyr Kernel"
+#     source "Kconfig.zephyr"
+# endmenu
 
 menu "CloudSense"
-    source "$(APPLICATION_SOURCE_DIR)/drivers/Kconfig"
+    rsource "drivers/Kconfig"
 endmenu

@@ -1,1 +1,2 @@
-zephyr_sources_ifdef(CONFIG_CUSTOM_DUMMY_SENSOR dummy_sensor.c)
+zephyr_library()
+zephyr_library_sources_ifdef(CONFIG_CUSTOM_DUMMY_SENSOR dummy_sensor.c)

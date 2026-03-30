@@ -1,0 +1,7 @@
+tests:
+  drivers.sensor.dummy_sensor:
+    tags:
+      - drivers
+      - sensor
+    platform_allow:
+      - native_sim

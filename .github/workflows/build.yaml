@@ -30,8 +30,8 @@ jobs:
 
       - name: Initialize West
         run: |
-          west init -l my-project/firmware
           cd my-project
+          west init -l firmware
           west update
 
       - name: Build Application

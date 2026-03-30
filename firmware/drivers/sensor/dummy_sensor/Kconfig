@@ -1,7 +1,7 @@
 config CUSTOM_DUMMY_SENSOR
-    bool "CloudSense Dummy Sensor Driver"
+    bool "CloudSense Dummy Sensor"
     default y
-    depends on DT_HAS_CLOUDSENSE_DUMMY_SENSOR_STATUS_OKAY
+    depends on DT_HAS_CLOUDSENSE_DUMMY_SENSOR_ENABLED
     select SENSOR
     help
       Enable support for the CloudSense dummy temperature sensor.

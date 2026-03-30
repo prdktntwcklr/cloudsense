@@ -1,1 +1,1 @@
-add_subdirectory(dummy_sensor)
+add_subdirectory_ifdef(CONFIG_CUSTOM_DUMMY_SENSOR dummy_sensor)

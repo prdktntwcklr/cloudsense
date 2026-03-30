@@ -26,25 +26,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
         with:
-          path: my-project 
-
-      - name: Cache Zephyr Workspace
-        id: cache-zephyr
-        uses: actions/cache@668228422ae6a00e4ad889ee87cd7109ec5666a7 # v5.0.4
-        with:
-          path: |
-            my-project/.west
-            my-project/bootloader
-            my-project/modules
-            my-project/tools
-            my-project/zephyr
-          key: ${{ runner.os }}-zephyr-${{ hashFiles('my-project/firmware/west.yml') }}
-          restore-keys: |
-            ${{ runner.os }}-zephyr-
+          path: my-project
 
       - name: Initialize West
-        # Only run if cache missed
-        if: steps.cache-zephyr.outputs.cache-hit != 'true'
         run: |
           west init -l my-project/firmware
           cd my-project

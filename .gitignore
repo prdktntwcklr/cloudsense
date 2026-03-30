@@ -4,11 +4,15 @@
 # Zephyr build artifacts
 build/
 
+# Ignore everything in zephyr except the module.yml file (and .gitignore)
+zephyr/*
+!zephyr/.gitignore
+!zephyr/module.yml
+
 # Downloaded Zephyr modules
 bootloader/
 modules/
 tools/
-zephyr/
 
 # Twister
 twister-out*/

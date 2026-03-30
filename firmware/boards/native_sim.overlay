@@ -1,0 +1,10 @@
+/ {
+    aliases {
+        temp-sensor = &dummy_sensor;
+    };
+
+    dummy_sensor: dummy_sensor {
+        compatible = "cloudsense,dummy-sensor";
+        status = "okay";
+    };
+};

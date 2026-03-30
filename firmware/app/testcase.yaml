@@ -1,5 +1,5 @@
 tests:
-  cloudsense.smoke:
+  cloudsense.app.smoke:
     tags: cloudsense
     platform_allow: native_sim
     harness: console
@@ -9,4 +9,4 @@ tests:
         - "Hello from CloudSense!"
         - "Temperature: 25.000000 C"
         - "Heartbeat: [0-9]+ ms"
-    timeout: 3
+    timeout: 3 # seconds

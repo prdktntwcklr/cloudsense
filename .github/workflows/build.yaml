@@ -50,12 +50,12 @@ jobs:
           cd my-project
           west update
 
-      - name: Build Firmware
+      - name: Build Application
         run: |
           cd my-project
-          west build -b native_sim firmware
+          west build -b native_sim firmware/app
 
-      - name: Run Tests
+      - name: Run Tests Tagged with "cloudsense"
         run: |
           cd my-project
-          west twister -p native_sim -T firmware --outdir test-results -v
+          west twister -p native_sim -T firmware -t cloudsense --outdir test-results -v

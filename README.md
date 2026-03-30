@@ -23,3 +23,12 @@ west build -b native_sim firmware
 # Run the simulation (press CTRL+C to exit)
 ./build/zephyr/zephyr.exe
 ```
+
+## Running tests
+
+To run the test suite:
+
+```bash
+# Run all tests with the "cloudsense" tag
+west twister -p native_sim -T firmware -t cloudsense --outdir test-results -v
+```

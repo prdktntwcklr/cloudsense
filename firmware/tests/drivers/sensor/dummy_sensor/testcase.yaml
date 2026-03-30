@@ -1,6 +1,7 @@
 tests:
-  drivers.sensor.dummy_sensor:
+  cloudsense.drivers.sensor.dummy_sensor:
     tags:
+      - cloudsense
       - drivers
       - sensor
     platform_allow:

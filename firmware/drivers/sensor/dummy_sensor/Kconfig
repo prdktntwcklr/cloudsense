@@ -1,7 +1,7 @@
-config CUSTOM_DUMMY_SENSOR
-    bool "CloudSense Dummy Sensor"
+config CUSTOM_SIMULATED_SENSOR
+    bool "CloudSense Simulated Sensor"
     default y
-    depends on DT_HAS_CLOUDSENSE_DUMMY_SENSOR_ENABLED
+    depends on DT_HAS_CLOUDSENSE_SIMULATED_SENSOR_ENABLED
     select SENSOR
     help
-      Enable support for the CloudSense dummy temperature sensor.
+      Enable support for the CloudSense simulated temperature sensor.

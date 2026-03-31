@@ -1,1 +1,1 @@
-add_subdirectory(dummy_sensor)
+add_subdirectory(simulated_sensor)

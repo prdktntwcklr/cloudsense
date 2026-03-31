@@ -1,5 +1,5 @@
 tests:
-  cloudsense.drivers.sensor.dummy_sensor:
+  cloudsense.drivers.sensor.simulated_sensor:
     tags:
       - cloudsense
       - drivers

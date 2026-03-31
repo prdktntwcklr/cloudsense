@@ -2,9 +2,9 @@
 
 **Cloudsense** is a hardware-agnostic firmware project built on Zephyr RTOS,
 designed for rapid prototyping and testing of sensor-based applications. By
-leveraging simulated (dummy) sensors and flexible board configurations,
-Cloudsense enables development, testing, and CI workflows without requiring
-physical hardware.
+leveraging simulated sensors and flexible board configurations, Cloudsense
+enables development, testing, and CI workflows without requiring physical
+hardware.
 
 ## Getting Started
 
@@ -38,9 +38,9 @@ Run the full test suite using `west twister`:
 west twister -p native_sim -T firmware -t cloudsense --outdir test-results -v
 ```
 
-## Dummy Temperature Sensor & Hardware Agnostic Development
+## Simulated Temperature Sensor & Hardware Agnostic Development
 
-Cloudsense includes a dummy temperature sensor driver for Zephyr RTOS which
+Cloudsense includes a simulated temperature sensor driver for Zephyr RTOS which
 enables developers to:
 
 - Develop and test sensor-based features without real hardware
@@ -48,10 +48,10 @@ enables developers to:
 - Rapidly prototype and validate features
 - Maintain portable, hardware-agnostic application logic
 
-### Extending or Using the Dummy Sensor
+### Using and extending the Simulated Sensor
 
 - Enabled by default in the native simulator configuration
-- Add custom simulated sensor data by extending the driver in `firmware/drivers/sensor/dummy_sensor/`
+- Add custom simulated sensor data by extending the driver in `firmware/drivers/sensor/simulated_sensor/`
 - Easily switch to real hardware by adding your board configuration and device
 tree overlays
 

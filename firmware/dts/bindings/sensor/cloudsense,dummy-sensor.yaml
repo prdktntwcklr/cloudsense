@@ -1,3 +1,3 @@
-description: CloudSense Dummy Sensor
-compatible: "cloudsense,dummy-sensor"
+description: CloudSense Simulated Sensor
+compatible: "cloudsense,simulated-sensor"
 include: sensor-device.yaml

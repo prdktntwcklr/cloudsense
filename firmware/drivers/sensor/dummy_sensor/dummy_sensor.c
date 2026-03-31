@@ -1,43 +1,43 @@
-#define DT_DRV_COMPAT cloudsense_dummy_sensor
+#define DT_DRV_COMPAT cloudsense_simulated_sensor
 
 #include <zephyr/device.h>
 #include <zephyr/drivers/sensor.h>
 
-struct dummy_sensor_data {
+struct simulated_sensor_data {
     int16_t temp;
 };
 
-static int dummy_sample_fetch(const struct device *dev, enum sensor_channel chan) {
-    struct dummy_sensor_data *data = dev->data;
+static int simulated_sample_fetch(const struct device *dev, enum sensor_channel chan) {
+    struct simulated_sensor_data *data = dev->data;
     data->temp = 25; // Simulate a constant 25°C
     return 0;
 }
 
-static int dummy_channel_get(const struct device *dev, enum sensor_channel chan, struct sensor_value *val) {
-    struct dummy_sensor_data *data = dev->data;
+static int simulated_channel_get(const struct device *dev, enum sensor_channel chan, struct sensor_value *val) {
+    struct simulated_sensor_data *data = dev->data;
     val->val1 = data->temp;
     val->val2 = 0;
     return 0;
 }
 
-static int dummy_init(const struct device *dev) {
+static int simulated_init(const struct device *dev) {
     return 0;
 }
 
-static const struct sensor_driver_api dummy_sensor_api = {
-    .sample_fetch = dummy_sample_fetch,
-    .channel_get = dummy_channel_get,
+static const struct sensor_driver_api simulated_sensor_api = {
+    .sample_fetch = simulated_sample_fetch,
+    .channel_get = simulated_channel_get,
 };
 
-#define DUMMY_SENSOR_CREATE_INST(inst) \
-    static struct dummy_sensor_data dummy_sensor_drv_##inst; \
+#define SIMULATED_SENSOR_CREATE_INST(inst) \
+    static struct simulated_sensor_data simulated_sensor_drv_##inst; \
     DEVICE_DT_INST_DEFINE(inst, \
-                          dummy_init, \
+                          simulated_init, \
                           NULL, \
-                          &dummy_sensor_drv_##inst, \
+                          &simulated_sensor_drv_##inst, \
                           NULL, \
                           POST_KERNEL, \
                           CONFIG_SENSOR_INIT_PRIORITY, \
-                          &dummy_sensor_api);
+                          &simulated_sensor_api);
 
-DT_INST_FOREACH_STATUS_OKAY(DUMMY_SENSOR_CREATE_INST)
+DT_INST_FOREACH_STATUS_OKAY(SIMULATED_SENSOR_CREATE_INST)

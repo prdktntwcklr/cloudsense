@@ -1,6 +1,8 @@
 #include <zephyr/kernel.h>
-#include <zephyr/sys/printk.h>
 #include <zephyr/drivers/sensor.h>
+#include <zephyr/logging/log.h>
+
+LOG_MODULE_REGISTER(cloudsense, LOG_LEVEL_INF);
 
 /**
  * @brief Get the temperature from the sensor
@@ -17,7 +19,7 @@ int get_temperature(const struct device *dev, struct sensor_value *temp) {
 
     int rc = sensor_sample_fetch(dev);
     if (rc != 0) {
-        printk("Failed to fetch sensor sample: %d\n", rc);
+        LOG_ERR("Failed to fetch sensor sample: %d", rc);
         return rc;
     }
 
@@ -31,25 +33,22 @@ int main(void) {
     const struct device *temp_sensor = DEVICE_DT_GET(DT_ALIAS(temp_sensor));
 
     if (!device_is_ready(temp_sensor)) {
-        printk("Sensor %s not ready", temp_sensor->name);
+        LOG_ERR("Sensor %s not ready", temp_sensor->name);
         return -ENODEV;
     }
 
-    printk("Hello from CloudSense!\n");
+    LOG_INF("Hello from CloudSense!");
 
     while (1) {
         struct sensor_value temp;
 
         int rc = get_temperature(temp_sensor, &temp);
         if (rc == 0) {
-            printk("Temperature: %d.%06d C\n", temp.val1, temp.val2);
+            LOG_INF("Temperature: %d.%06d C", temp.val1, temp.val2);
         }
         else {
-            printk("Error reading temperature: %d\n", rc);
+            LOG_WRN("Error reading temperature: %d", rc);
         }
-
-        int64_t uptime_ms = k_uptime_get();
-        printk("System uptime: %lld ms\n", uptime_ms);
 
         k_msleep(1000);
     }

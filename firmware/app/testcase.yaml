@@ -8,5 +8,5 @@ tests:
       regex:
         - "Hello from CloudSense!"
         - "Temperature: 25.000000 C"
-        - "Heartbeat: [0-9]+ ms"
+        - "System uptime: [0-9]+ ms"
     timeout: 3 # seconds

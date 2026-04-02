@@ -19,7 +19,7 @@ int get_temperature(const struct device *dev, struct sensor_value *temp) {
 
     int rc = sensor_sample_fetch(dev);
     if (rc != 0) {
-        LOG_ERR("Failed to fetch sensor sample: %d", rc);
+        LOG_ERR("Failed to fetch temperature sensor sample: %d", rc);
         return rc;
     }
 
@@ -33,7 +33,7 @@ int main(void) {
     const struct device *temp_sensor = DEVICE_DT_GET(DT_ALIAS(temp_sensor));
 
     if (!device_is_ready(temp_sensor)) {
-        LOG_ERR("Sensor %s not ready", temp_sensor->name);
+        LOG_ERR("Temperature sensor %s is not ready", temp_sensor->name);
         return -ENODEV;
     }
 

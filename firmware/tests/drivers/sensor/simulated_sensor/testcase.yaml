@@ -1,0 +1,8 @@
+tests:
+  cloudsense.drivers.sensor.simulated_sensor:
+    tags:
+      - cloudsense
+      - drivers
+      - sensor
+    platform_allow:
+      - native_sim

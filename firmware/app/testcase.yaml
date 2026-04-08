@@ -1,5 +1,5 @@
 tests:
-  cloudsense.smoke:
+  cloudsense.app.smoke:
     tags: cloudsense
     platform_allow: native_sim
     harness: console
@@ -7,5 +7,5 @@ tests:
       type: multi_line # all lines below must be present in the output
       regex:
         - "Hello from CloudSense!"
-        - "Heartbeat: [0-9]+ ms"
-    timeout: 3
+        - "Temperature: 25.000000 C"
+    timeout: 3 # seconds

@@ -1,0 +1,12 @@
+/ {
+    aliases {
+        simulated = &simulated_sensor;
+    };
+};
+
+/ {
+    simulated_sensor: simulated_sensor {
+        compatible = "cloudsense,simulated-sensor";
+        status = "okay";
+    };
+};

@@ -26,7 +26,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
         with:
-          path: my-project 
+          path: my-project
 
       - name: Cache Zephyr Workspace
         id: cache-zephyr
@@ -43,19 +43,21 @@ jobs:
             ${{ runner.os }}-zephyr-
 
       - name: Initialize West
-        # Only run if cache missed
-        if: steps.cache-zephyr.outputs.cache-hit != 'true'
         run: |
-          west init -l my-project/firmware
           cd my-project
+
+          if [ ! -d ".west" ]; then
+            west init -l firmware
+          fi
+          
           west update
 
-      - name: Build Firmware
+      - name: Build Application
         run: |
           cd my-project
-          west build -b native_sim firmware
+          west build -b native_sim firmware/app
 
-      - name: Run Tests
+      - name: Run Tests Tagged with "cloudsense"
         run: |
           cd my-project
-          west twister -p native_sim -T firmware --outdir test-results -v
+          west twister -p native_sim -T firmware -t cloudsense --outdir test-results -v

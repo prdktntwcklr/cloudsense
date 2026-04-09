@@ -1,3 +1,10 @@
 description: CloudSense Simulated Sensor
 compatible: "cloudsense,simulated-sensor"
 include: sensor-device.yaml
+
+properties:
+  base-temp:
+    type: int
+    required: false
+    default: 25
+    description: Base temperature in degrees Celsius

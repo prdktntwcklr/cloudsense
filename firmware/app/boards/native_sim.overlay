@@ -6,5 +6,6 @@
     simulated_sensor: simulated_sensor {
         compatible = "cloudsense,simulated-sensor";
         status = "okay";
+        base-temp = <30>;
     };
 };

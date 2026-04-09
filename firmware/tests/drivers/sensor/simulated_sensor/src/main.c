@@ -35,5 +35,17 @@ ZTEST(simulated_sensor_tests, test_sensor_reading) {
     zassert_equal(val.val2, 0, "Expected 0 micro-degrees, got %d", val.val2);
 }
 
+/* Test: Sensor should only support ambient temperature channel */
+ZTEST(simulated_sensor_tests, test_sensor_supported_channels) {
+    const struct device *dev = get_simulated_sensor();
+    struct sensor_value val;
+
+    int ret = sensor_channel_get(dev, SENSOR_CHAN_AMBIENT_TEMP, &val);
+    zassert_equal(ret, 0, "Sensor should support ambient temperature channel");
+
+    ret = sensor_channel_get(dev, SENSOR_CHAN_PRESS, &val);
+    zassert_equal(ret, -ENOTSUP, "Sensor should not support pressure channel");
+}
+
 /* Define the test suite */
 ZTEST_SUITE(simulated_sensor_tests, NULL, NULL, NULL, NULL, NULL);

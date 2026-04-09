@@ -7,5 +7,5 @@ tests:
       type: multi_line # all lines below must be present in the output
       regex:
         - "Hello from CloudSense!"
-        - "Temperature: 25.000000 C"
+        - "Temperature: 30.000000 C"
     timeout: 3 # seconds

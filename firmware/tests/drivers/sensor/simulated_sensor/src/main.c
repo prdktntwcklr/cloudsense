@@ -40,9 +40,11 @@ ZTEST(simulated_sensor_tests, test_sensor_supported_channels) {
     const struct device *dev = get_simulated_sensor();
     struct sensor_value val;
 
+    // Test that the sensor supports the ambient temperature channel
     int ret = sensor_channel_get(dev, SENSOR_CHAN_AMBIENT_TEMP, &val);
     zassert_equal(ret, 0, "Sensor should support ambient temperature channel");
 
+    // Test that the sensor does not support the pressure channel
     ret = sensor_channel_get(dev, SENSOR_CHAN_PRESS, &val);
     zassert_equal(ret, -ENOTSUP, "Sensor should not support pressure channel");
 }

@@ -9,7 +9,7 @@ manifest:
   projects:
     - name: zephyr
       remote: zephyrproject-rtos
-      revision: main # Update once new Zephyr release is compatible with zephyr-sdk-1.0.0
+      revision: v4.4.0
       import:
         name-allowlist:
           - cmsis
